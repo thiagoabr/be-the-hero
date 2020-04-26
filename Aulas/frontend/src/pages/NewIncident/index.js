@@ -12,12 +12,16 @@ export default function NewIncident(){
     const[title, setTitle] = useState('');
     const[description, setDescription] = useState('');
     const[value, setValue] = useState('');
+    
+    const history = useHistory();
 
     const ongId = localStorage.getItem('ongId');
 
-    const history = useHistory();
+    if(!ongId){
+        history.push('/');
+    }
 
-    async function handleNewInciden(e){
+    async function handleNewIncident(e){
         e.preventDefault();
 
         const data = {
@@ -55,7 +59,7 @@ export default function NewIncident(){
                         Voltar para home
                     </Link>                    
                 </section>
-                <form onSubmit={handleNewInciden}>
+                <form onSubmit={handleNewIncident}>
                     <input 
                     placeholder="Titulo do caso" 
                     value={title}
